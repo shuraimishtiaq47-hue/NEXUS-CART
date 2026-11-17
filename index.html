@@ -1,0 +1,101 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta name="theme-color" content="#101827">
+<title>NEXUS CART | Shop smarter</title>
+<style>
+:root{--ink:#101827;--blue:#2563eb;--pale:#eff6ff;--muted:#64748b;--line:#e5eaf2}
+*{box-sizing:border-box}body{margin:0;font-family:Inter,Arial,sans-serif;color:var(--ink);background:#fff}
+a{color:inherit;text-decoration:none}.wrap{max-width:1160px;margin:auto;padding:0 22px}
+header{background:#fff;border-bottom:1px solid var(--line);position:sticky;top:0;z-index:5}
+.nav{height:76px;display:flex;align-items:center;justify-content:space-between;gap:18px}
+.logo{font-weight:900;letter-spacing:1.5px;font-size:21px}.logo span{color:var(--blue)}
+nav{display:flex;gap:25px;color:#475569;font-size:14px}.cart-btn,.primary{border:0;background:var(--blue);color:white;padding:12px 18px;border-radius:9px;font-weight:700;cursor:pointer}
+.hero{background:linear-gradient(115deg,#101827,#172e55);color:white;padding:76px 0}
+.hero-inner{display:grid;grid-template-columns:1.25fr .75fr;gap:35px;align-items:center}
+.eyebrow{color:#93c5fd;text-transform:uppercase;letter-spacing:2px;font-size:12px;font-weight:800}
+h1{font-size:clamp(38px,6vw,64px);line-height:1.04;margin:16px 0}
+.hero p{color:#cbd5e1;line-height:1.7;max-width:550px}
+.hero-art{min-height:250px;border:1px solid #ffffff2b;border-radius:22px;background:radial-gradient(circle at 50% 40%,#3b82f6,#1e3a8a 40%,#172033 72%);display:grid;place-items:center;font-size:82px}
+.section{padding:58px 0}.section-head{display:flex;justify-content:space-between;align-items:end;gap:15px;margin-bottom:24px}
+h2{font-size:30px;margin:0 0 8px}.sub{color:var(--muted);margin:0}
+.categories{display:flex;gap:10px;flex-wrap:wrap;margin:22px 0}
+.chip{border:1px solid var(--line);background:#fff;padding:9px 15px;border-radius:30px;cursor:pointer;color:#475569}
+.chip.active{background:var(--ink);color:#fff;border-color:var(--ink)}
+.grid{display:grid;grid-template-columns:repeat(4,1fr);gap:18px}
+.product{border:1px solid var(--line);border-radius:15px;overflow:hidden;background:#fff}
+.product-art{height:175px;display:grid;place-items:center;background:var(--pale);font-size:55px}
+.product-info{padding:16px}.tag{font-size:11px;color:var(--blue);font-weight:800;text-transform:uppercase;letter-spacing:1px}
+.product h3{font-size:16px;margin:8px 0}.price{font-weight:800;margin:12px 0}.add{width:100%;border:1px solid #cbd5e1;background:#fff;padding:10px;border-radius:8px;font-weight:700;cursor:pointer}
+.add:hover{background:var(--pale);border-color:var(--blue)}
+.benefits{display:grid;grid-template-columns:repeat(3,1fr);gap:18px}
+.benefit{background:#f8fafc;padding:22px;border-radius:14px}.benefit b{display:block;margin:8px 0}.benefit p{color:var(--muted);font-size:14px;line-height:1.6;margin:0}
+footer{background:#101827;color:#cbd5e1;padding:36px 0}.foot{display:flex;justify-content:space-between;gap:20px;flex-wrap:wrap}.foot .logo{color:#fff}
+.cart-panel{position:fixed;right:0;top:0;height:100vh;width:min(390px,100%);background:#fff;z-index:10;box-shadow:-12px 0 35px #0002;padding:24px;transform:translateX(110%);transition:.25s;overflow:auto}
+.cart-panel.open{transform:translateX(0)}.cart-top{display:flex;justify-content:space-between;align-items:center}.close{border:0;background:#f1f5f9;border-radius:8px;padding:8px 12px;cursor:pointer}
+.cart-line{display:flex;justify-content:space-between;gap:12px;padding:14px 0;border-bottom:1px solid var(--line);font-size:14px}
+.total{display:flex;justify-content:space-between;font-weight:800;margin:20px 0}
+.notice{font-size:12px;color:var(--muted);line-height:1.5}
+@media(max-width:800px){.grid{grid-template-columns:repeat(2,1fr)}.hero-inner{grid-template-columns:1fr}.hero-art{min-height:170px}.benefits{grid-template-columns:1fr}nav{display:none}}
+@media(max-width:430px){.grid{gap:10px}.product-art{height:130px}.product-info{padding:12px}.section{padding:42px 0}}
+</style>
+</head>
+<body>
+<header><div class="wrap nav">
+<a class="logo" href="#">NEXUS <span>CART</span></a>
+<nav><a href="#home">Home</a><a href="#shop">Shop</a><a href="#about">About</a><a href="#contact">Contact</a></nav>
+<button class="cart-btn" onclick="toggleCart(true)">Cart (<span id="count">0</span>)</button>
+</div></header>
+<main>
+<section class="hero" id="home"><div class="wrap hero-inner">
+<div><div class="eyebrow">Welcome to NEXUS CART</div><h1>Shop smarter.<br>Live better.</h1>
+<p>Discover everyday essentials and handpicked finds in one simple, convenient place. Great choices, clear prices, and a smoother shopping experience.</p>
+<a class="primary" href="#shop" style="display:inline-block;margin-top:12px">Explore products</a></div>
+<div class="hero-art" aria-label="Shopping bag illustration">🛍️</div>
+</div></section>
+<section class="section wrap" id="shop">
+<div class="section-head"><div><div class="eyebrow" style="color:#2563eb">Our collection</div><h2>Featured products</h2><p class="sub">A sample catalogue — replace these with your real products.</p></div></div>
+<div class="categories" id="filters"><button class="chip active" data-cat="All">All</button><button class="chip" data-cat="Electronics">Electronics</button><button class="chip" data-cat="Fashion">Fashion</button><button class="chip" data-cat="Lifestyle">Lifestyle</button></div>
+<div class="grid" id="products"></div>
+</section>
+<section class="section" id="about" style="background:#f8fafc"><div class="wrap">
+<div class="eyebrow" style="color:#2563eb">Why Nexus Cart</div><h2>Shopping made simple</h2><div class="benefits">
+<div class="benefit"><div>✦</div><b>Handpicked selection</b><p>Showcase the products your customers are looking for.</p></div>
+<div class="benefit"><div>✓</div><b>Clear product details</b><p>Display straightforward descriptions and pricing.</p></div>
+<div class="benefit"><div>♡</div><b>Customer-first service</b><p>Add your support details so shoppers know how to reach you.</p></div>
+</div></div></section>
+<section class="section wrap" id="contact"><div class="eyebrow" style="color:#2563eb">Get in touch</div><h2>We'd love to hear from you</h2><p class="sub">Add your business email, phone number, and social links here before publishing.</p></section>
+</main>
+<footer><div class="wrap foot"><div><div class="logo">NEXUS <span style="color:#60a5fa">CART</span></div><p>Shop smarter. Live better.</p></div><div id="footer-contact">Contact: add your business email</div><div>© <span id="year"></span> NEXUS CART</div></div></footer>
+<aside class="cart-panel" id="cart"><div class="cart-top"><h2>Your cart</h2><button class="close" onclick="toggleCart(false)">Close</button></div><div id="cart-items"></div><div class="total"><span>Total</span><span id="total">Rs 0</span></div><p class="notice">Demo only: this starter website does not process real payments or send orders. Connect a secure checkout and your business contact details before accepting customers.</p></aside>
+<script>
+const items=[
+{id:1,name:"Wireless Headphones",cat:"Electronics",price:4500,icon:"🎧"},
+{id:2,name:"Smart Watch",cat:"Electronics",price:6200,icon:"⌚"},
+{id:3,name:"Everyday Backpack",cat:"Fashion",price:2800,icon:"🎒"},
+{id:4,name:"Classic Sneakers",cat:"Fashion",price:5200,icon:"👟"},
+{id:5,name:"Desk Lamp",cat:"Lifestyle",price:1900,icon:"💡"},
+{id:6,name:"Travel Bottle",cat:"Lifestyle",price:950,icon:"🧴"},
+{id:7,name:"Bluetooth Speaker",cat:"Electronics",price:3500,icon:"🔊"},
+{id:8,name:"Minimal Wallet",cat:"Fashion",price:1500,icon:"👛"}
+];
+let cart={};
+const money=n=>"Rs "+n.toLocaleString("en-PK");
+function renderProducts(cat="All"){
+ document.getElementById("products").innerHTML=items.filter(x=>cat==="All"||x.cat===cat).map(x=>`<article class="product"><div class="product-art">${x.icon}</div><div class="product-info"><div class="tag">${x.cat}</div><h3>${x.name}</h3><div class="price">${money(x.price)}</div><button class="add" onclick="add(${x.id})">Add to cart</button></div></article>`).join("");
+}
+function add(id){cart[id]=(cart[id]||0)+1;renderCart();toggleCart(true)}
+function renderCart(){
+ const count=Object.values(cart).reduce((a,b)=>a+b,0);document.getElementById("count").textContent=count;
+ let total=0;const lines=Object.entries(cart).map(([id,q])=>{const p=items.find(x=>x.id==id);total+=p.price*q;return `<div class="cart-line"><span>${p.icon} ${p.name} × ${q}</span><b>${money(p.price*q)}</b></div>`});
+ document.getElementById("cart-items").innerHTML=lines.length?lines.join(""):"<p class='sub'>Your cart is empty.</p>";
+ document.getElementById("total").textContent=money(total);
+}
+function toggleCart(open){document.getElementById("cart").classList.toggle("open",open)}
+document.querySelectorAll(".chip").forEach(b=>b.addEventListener("click",()=>{document.querySelectorAll(".chip").forEach(x=>x.classList.remove("active"));b.classList.add("active");renderProducts(b.dataset.cat)}));
+document.getElementById("year").textContent=new Date().getFullYear();
+renderProducts();renderCart();
+</script>
+</body></html>
